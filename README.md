@@ -1,4 +1,4 @@
-# granit
+# electronic-discount
 
 > A Vue.js project
 
