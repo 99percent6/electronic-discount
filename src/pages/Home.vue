@@ -1,14 +1,18 @@
 <template>
   <div id="home">
-    <div class="background">
+    <div class="background flex center-xs middle-xs">
+      <search-panel />
     </div>
-    <div class="row home-container">
-      <div class="products col-xs-12 col-md-6 center-xs middle-xs">
+    <div class="content-container">
+      <div class="store col-xs-12 center-xs middle-xs">
+        <stores />
+      </div>
+      <div class="products col-xs-12 center-xs middle-xs">
+        <div class="title">
+          <h2>Текущие акции</h2>
+        </div>
         <slider :items="eldoItems" imgLink="/static/stores/eldorado.png"/>
         <slider :items="mvideoItems" imgLink="/static/stores/mvideo.png"/>
-      </div>
-      <div class="stores col-xs-12 col-md-6 center-xs middle-xs">
-        Магазины
       </div>
     </div>
   </div>
@@ -18,50 +22,73 @@
 import ProductTile from '../components/ProductTile.vue'
 import Slider from '../components/Slider.vue'
 import EldoradoItems from '../../stores/data/eldorado.json'
-import Mvideo from '../../stores/data/mvideo.json'
+import MvideoItems from '../../stores/data/mvideo.json'
+import SearchPanel from '../components/search.vue'
+import Stores from '../components/Stores.vue'
 
 export default {
   data () {
     return {
-      eldoItems: EldoradoItems.items,
-      mvideoItems: Mvideo.items
+      eldoItems: [],
+      mvideoItems: []
+    }
+  },
+  created () {
+    for (let item of EldoradoItems.items) {
+      Object.assign(item, { store: 'Eldorado' })
+      this.eldoItems.push(item)
+    }
+    for (let item of MvideoItems.items) {
+      Object.assign(item, { store: 'Mvideo' })
+      this.mvideoItems.push(item)
     }
   },
   components: {
     ProductTile,
-    Slider
+    Slider,
+    SearchPanel,
+    Stores
   }
 }
 </script>
 
 <style lang="css" scoped>
 #home {
-  height: 100vh;
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
 }
 .background {
-  height: 102vh;
-  width: 102vw;
-  margin: -10px;
+  height: 80vh;
+  width: 100%;
   background-image: url('../assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(5px);
-  position: absolute;
-  z-index: -1;
+  background-position: 0 -100px;
+  position: relative;
 }
-.home-container {
-  height: inherit;
-  margin: 0;
+.content-container {
+  background-color: #e8edee;
+  width: 70vw;
+  margin: 0 auto;
 }
 .products {
-  background-color: rgba(220, 220, 220, 0.7);
-  padding-top: 70px;
+  margin: 0 auto;
 }
 .stores {
   background-color: rgba(255, 255, 255, 0.7);
   padding-top: 70px;
 }
+.stores-logo {
+  padding-top: 30px;
+  flex-wrap: wrap;
+}
+img {
+  width: 200px;
+  margin: 20px;
+}
+/* @media (max-width: 480px) {
+  img {
+    width: 100px;
+  }
+} */
 </style>

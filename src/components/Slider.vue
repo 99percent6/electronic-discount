@@ -1,8 +1,5 @@
 <template>
   <div class="carousel-container">
-    <div class="logo">
-      <img v-lazy="imageObj">
-    </div>
     <swiper :options="swiperOption">
       <swiper-slide v-for="(slide, index) in swiperSlides.slice(0, 10)" :key="index">
         <product-tile :product="slide"/>
@@ -27,8 +24,8 @@ export default {
         autoplay: {
           delay: 3000
         },
-        slidesPerView: 3,
-        spaceBetween: 30,
+        slidesPerView: 4,
+        spaceBetween: 20,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -71,13 +68,6 @@ export default {
 <style lang="css" scoped>
 .carousel-container {
   box-sizing: border-box;
-  background-color: rgba(194, 194, 194, 0.3);
-}
-.logo {
-  padding-top: 20px;
-  margin-bottom: 10px;
-}
-img {
-  width: 200px;
+  margin-top: 30px;
 }
 </style>

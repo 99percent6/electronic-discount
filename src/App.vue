@@ -2,22 +2,26 @@
   <div id="app">
     <main-header />
     <router-view/>
+    <main-footer />
   </div>
 </template>
 
 <script>
 import MainHeader from './components/Header.vue'
+import MainFooter from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    MainHeader
+    MainHeader,
+    MainFooter
   }
 }
 </script>
 
 <style src="./css/flexbox-grid.css" lang="css"></style>
 <style src="./css/position.css" lang="css"></style>
+<style src="./css/visual.css" lang="css"></style>
 
 <style>
 body {

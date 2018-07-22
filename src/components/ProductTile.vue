@@ -1,9 +1,9 @@
 <template>
   <div class="product col-xs-12">
-    <div class="product-image">
-      <img :src="product.imageLink">
+    <div class="product-image flex center-xs">
+      <img v-lazy="imageObj">
     </div>
-    <div class="product-descr">
+    <div class="product-descr relative flex center-xs">
       <div class="product-name">
         {{ product.title }}
       </div>
@@ -11,13 +11,34 @@
         <span class="new-price">{{ `${product.newPrice} &#8381;` }}</span>
         <span class="old-price">{{ `${product.oldPrice} &#8381;` }}</span>
       </div>
+      <div class="store absolute">
+        <img :src="getLogoLink(product.store)">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['product']
+  props: ['product'],
+  computed: {
+    imageObj () {
+      return {
+        src: this.product.imageLink,
+        loading: '../../static/logo.png',
+        error: '../../static/logo.png'
+      }
+    }
+  },
+  methods: {
+    getLogoLink (store) {
+      if (store === 'Eldorado') {
+        return '../../static/stores/eldorado.png'
+      } else {
+        return '../../static/stores/mvideo.png'
+      }
+    }
+  }
 }
 </script>
 
@@ -52,11 +73,19 @@ export default {
   color: red;
   text-decoration: line-through;
 }
-img {
+.product-image img {
   height: 170px;
   width: 100%;
   object-fit: contain;
   max-width: 242px;
   margin-bottom: 5px;
+}
+.store {
+  right: 10px;
+  bottom: 10px;
+}
+.store img {
+  height: 20px;
+  width: auto;
 }
 </style>

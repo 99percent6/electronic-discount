@@ -12,7 +12,8 @@ osmosis
         title: '.c-product-tile__description .c-product-tile__description-wrapper h4 a',
         oldPrice: '.c-product-tile__checkout-section .c-pdp-price .c-pdp-price__sale .c-pdp-price__old',
         newPrice: '.c-product-tile__checkout-section .c-pdp-price .c-pdp-price__current',
-        imageLink: '.c-product-tile-picture .c-product-tile-picture__holder a .c-product-tile-picture__link img@data-original'
+        imageLink: '.c-product-tile-picture .c-product-tile-picture__holder a .c-product-tile-picture__link img@data-original',
+        store: 'Mvideo'
       })
     ]
   })

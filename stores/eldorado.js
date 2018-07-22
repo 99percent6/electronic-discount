@@ -12,7 +12,8 @@ osmosis
         title: '.item__descr a.descr_name',
         oldPrice: '.item__descr .descr__prices p',
         newPrice: '.item__descr .descr__prices h3',
-        imageLink: '.item__images .images_goods img@src'
+        imageLink: '.item__images .images_goods img@src',
+        store: 'Eldorado'
       })
     ]
   })
