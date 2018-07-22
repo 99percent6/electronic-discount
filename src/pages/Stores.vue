@@ -8,8 +8,8 @@
         <h3 @click="hide = !hide" class="pointer">Фильтры</h3>
         <span class="pointer" :class="hide ? 'arrow-up' : ''">&#8250;</span>
       </div>
-      <div class="all-filters" :class="hide ? 'hide' : ''">
-        <div v-if="$route.params.slug === 'all'" class="store-filter">
+      <div class="all-filters flex flex-wrap" :class="hide ? 'hide' : ''">
+        <div v-if="$route.params.slug === 'all'" class="store-filter col-xs-12 col-md-2">
           <div class="name">
             Магазин
           </div>
@@ -17,9 +17,12 @@
             <div class="" v-for="(store, index) in storeList" :key="index">
               <input type="radio" :name="store.name" value=""
                 :checked="selectedStore === store.name" @click="selectStore(store.name)">
-              <label :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
+              <label :class="selectedStore === store.name ? 'active-input' : ''" :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
             </div>
           </div>
+        </div>
+        <div class="col-xs-12 col-md-2">
+          <price-filter :max-price="maxPrice"/>
         </div>
       </div>
     </div>
@@ -28,6 +31,7 @@
         <product-tile :product="product" />
       </div>
     </div>
+    <pagination />
   </div>
 </template>
 
@@ -35,11 +39,14 @@
 import ProductTile from '../components/ProductTile.vue'
 import EldoradoItems from '../../stores/data/eldorado.json'
 import MvideoItems from '../../stores/data/mvideo.json'
+import Pagination from '../components/Pagination.vue'
+import PriceFilter from '../components/Stores/Filters/Price.vue'
 
 export default {
   data () {
     return {
       items: [],
+      rootItems: [],
       store: '',
       storeList: [
         {
@@ -52,7 +59,11 @@ export default {
         }
       ],
       selectedStore: '',
-      hide: false
+      hide: false,
+      pagination: {
+        perPage: 20
+      },
+      countProducts: 0
     }
   },
   methods: {
@@ -62,39 +73,90 @@ export default {
       } else {
         this.selectedStore = store
       }
+    },
+    itemsHandle (items, text, resetPagination = false) {
+      this.items = items.slice(0, this.pagination.perPage)
+      this.store = text
+      this.countProducts = items.length
+      this.rootItems = items
+      let page = this.$route.params.page || 1
+      let store = this.$route.query.store
+      if (resetPagination) {
+        this.$router.push({ name: this.$route.name, params: { page: 1 } })
+      }
+      if (page !== 1) {
+        this.getItems()
+      }
+      if (store) {
+        this.selectedStore = store
+      }
+    },
+    getItems () {
+      let page = this.$route.params.page || 1
+      let perPage = this.pagination.perPage
+      this.items = this.rootItems.slice((page - 1) * perPage, perPage * page)
+    },
+    applyPriceFilter (priceRange) {
+      let filteredItems = []
+      for (let itm of this.rootItems) {
+        let price = parseInt(itm.newPrice.replace(/\s/g, ''))
+        if (price >= priceRange.from && price <= priceRange.to) {
+          filteredItems.push(itm)
+        }
+      }
+      this.items = filteredItems
     }
+  },
+  beforeMount () {
+    this.$bus.$on('change-price', (obj) => {
+      this.applyPriceFilter(obj)
+    })
   },
   created () {
     let slug = this.$route.params.slug
     if (slug) {
       if (slug === 'eldorado') {
-        this.items = EldoradoItems.items
-        this.store = 'в Эльдорадо'
+        this.itemsHandle(EldoradoItems.items, 'в Эльдорадо')
       } else if (slug === 'mvideo') {
-        this.items = MvideoItems.items
-        this.store = 'в Мвидео'
+        this.itemsHandle(MvideoItems.items, 'в Мвидео')
       } else {
-        this.items = EldoradoItems.items.concat(MvideoItems.items)
-        this.store = 'во всех магазинах'
+        this.itemsHandle(EldoradoItems.items.concat(MvideoItems.items), 'во всех магазинах')
       }
     }
   },
+  computed: {
+    maxPrice () {
+      let maxPrice = 0
+      for (let itm of this.rootItems) {
+        let price = parseInt(itm.newPrice.replace(/\s/g, ''))
+        if (price > maxPrice) {
+          maxPrice = price
+        }
+      }
+      return maxPrice
+    }
+  },
   components: {
-    ProductTile
+    ProductTile,
+    Pagination,
+    PriceFilter
   },
   watch: {
     'selectedStore': function () {
       switch (this.selectedStore) {
         case 'eldorado':
-          this.items = EldoradoItems.items
+          this.itemsHandle(EldoradoItems.items, 'в Эльдорадо', true)
+          // this.$router.replace({ path: `${this.$route.path}?store=eldorado` })
           break
         case 'mvideo':
-          this.items = MvideoItems.items
+          this.itemsHandle(MvideoItems.items, 'в Мвидео', true)
+          // this.$router.replace({ path: `${this.$route.path}?store=mvideo` })
           break
         default:
-          this.items = EldoradoItems.items.concat(MvideoItems.items)
+          this.itemsHandle(EldoradoItems.items.concat(MvideoItems.items), 'во всех магазинах', true)
       }
-    }
+    },
+    '$route': 'getItems'
   }
 }
 </script>
@@ -142,5 +204,8 @@ export default {
   max-height: 0;
   opacity: 0;
   transition: max-height .5s ease-out .2s, opacity .5s;
+}
+.active-input {
+  font-weight: 700;
 }
 </style>

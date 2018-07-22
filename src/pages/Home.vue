@@ -24,7 +24,7 @@ import Slider from '../components/Slider.vue'
 import EldoradoItems from '../../stores/data/eldorado.json'
 import MvideoItems from '../../stores/data/mvideo.json'
 import SearchPanel from '../components/search.vue'
-import Stores from '../components/Stores.vue'
+import Stores from '../components/Stores/Stores.vue'
 
 export default {
   data () {

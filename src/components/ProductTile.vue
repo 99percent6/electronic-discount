@@ -1,7 +1,7 @@
 <template>
   <div class="product col-xs-12">
     <div class="product-image flex center-xs">
-      <img v-lazy="imageObj">
+      <img :src="product.imageLink">
     </div>
     <div class="product-descr relative flex center-xs">
       <div class="product-name">
@@ -25,24 +25,24 @@ export default {
     imageObj () {
       return {
         src: this.product.imageLink,
-        loading: '../../static/logo.png',
-        error: '../../static/logo.png'
+        loading: `${window.location.origin}/static/logo.png`,
+        error: `${window.location.origin}/static/logo.png`
       }
     }
   },
   methods: {
     getLogoLink (store) {
       if (store === 'Eldorado') {
-        return '../../static/stores/eldorado.png'
+        return `${window.location.origin}/static/stores/eldorado.png`
       } else {
-        return '../../static/stores/mvideo.png'
+        return `${window.location.origin}/static/stores/mvideo.png`
       }
     }
   }
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .product {
   padding-top: 25px;
   padding-bottom: 5px;
@@ -54,6 +54,11 @@ export default {
   margin-bottom: 15px;
   box-sizing: border-box;
   position: relative;
+  transition: 0.3s all;
+  &:hover {
+    margin-top: -5px;
+    box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+  }
 }
 .product-name {
   font-size: 13px;

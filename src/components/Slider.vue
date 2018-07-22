@@ -59,13 +59,18 @@ export default {
 }
 </script>
 
-<style lang="css">
-  .swiper-pagination {
-    position: relative;
+<style lang="scss">
+.carousel-container {
+  .swiper-container {
+    padding-top: 20px;
   }
+}
+.swiper-pagination {
+  position: relative;
+}
 </style>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .carousel-container {
   box-sizing: border-box;
   margin-top: 30px;

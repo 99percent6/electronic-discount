@@ -17,6 +17,11 @@ export default new Router({
       path: '/stores/:slug',
       name: 'Stores',
       component: Stores
+    },
+    {
+      path: '/stores/:slug/page/:page',
+      name: 'Stores-page',
+      component: Stores
     }
   ]
 })

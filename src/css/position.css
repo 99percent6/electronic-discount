@@ -10,3 +10,6 @@
 .absolute {
   position: absolute;
 }
+.align-center {
+  text-align: center;
+}

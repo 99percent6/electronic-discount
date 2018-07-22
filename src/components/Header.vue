@@ -7,7 +7,7 @@
         </router-link>
       </div>
       <div class="navigation">
-        <router-link :to="{ name: 'Stores', params: { slug: 'all' } }">Акции</router-link>
+        <router-link :to="{ name: 'Stores', params: { slug: 'all' } }">Все акции</router-link>
       </div>
     </div>
   </div>
