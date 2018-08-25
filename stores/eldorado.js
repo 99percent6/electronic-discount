@@ -1,6 +1,7 @@
 const osmosis = require('osmosis');
 const fs = require("fs");
 const url = 'https://www.eldorado.ru'
+let increment = 0
 
 osmosis
   .get('https://www.eldorado.ru/promo/prm-summer-discount/')
@@ -21,7 +22,9 @@ osmosis
       itm.imageLink = url + itm.imageLink;
       itm.newPrice = itm.newPrice.substring(0, itm.newPrice.length - 2);
       itm.oldPrice = itm.oldPrice ? itm.oldPrice.substring(0, itm.oldPrice.length - 2) : '';
-      itm.store = 'Eldorado'
+      itm.store = 'Eldorado';
+      itm.id = ++increment;
+      itm.created_at = new Date();
     }
     fs.writeFileSync("stores/data/eldorado.json", JSON.stringify(data, '', 1));
   })

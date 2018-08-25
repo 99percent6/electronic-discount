@@ -1,9 +1,10 @@
 const osmosis = require('osmosis');
 const fs = require("fs");
+let increment = 0
 
 osmosis
-  .get('https://www.mvideo.ru/promo/akciya-letnie-skretch-karty-mark112902911/f/discount=5')
-  .paginate('.o-pagination-section .c-pagination .c-toggle-buttons a[href].c-pagination__num', 133)
+  .get('https://www.mvideo.ru/promo/kibervygoda-skidki-do-50-obshhii-mark114704162')
+  .paginate('.o-pagination-section .c-pagination .c-toggle-buttons a[href].c-pagination__num', 102)
   .find('.o-plp-container__product-listing')
   .set({
     items:[
@@ -19,7 +20,9 @@ osmosis
   .data(function(data) {
     for (let itm of data.items) {
       itm.newPrice = itm.newPrice.substring(0, itm.newPrice.length - 1)
-      it.store = 'Mvideo'
+      itm.store = 'Mvideo'
+      itm.id = ++increment
+      itm.created_at = new Date()
     }
     console.log('Count of new items - ', data.items.length);
     let currentData = fs.readFileSync("stores/data/mvideo.json", "utf8");

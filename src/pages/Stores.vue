@@ -37,10 +37,22 @@
 
 <script>
 import ProductTile from '../components/ProductTile.vue'
-import EldoradoItems from '../../stores/data/eldorado.json'
-import MvideoItems from '../../stores/data/mvideo.json'
+// import EldoradoItems from '../../stores/data/eldorado.json'
+// import MvideoItems from '../../stores/data/mvideo.json'
 import Pagination from '../components/Pagination.vue'
 import PriceFilter from '../components/Stores/Filters/Price.vue'
+// import { database } from '../main.js'
+import Vue from 'vue'
+import VueFire from 'vuefire'
+import firebase from 'firebase/app'
+import 'firebase/database'
+
+Vue.use(VueFire)
+const firebaseApp = firebase.initializeApp({
+  projectId: 'electronic-discounter',
+  databaseURL: 'https://electronic-discounter.firebaseio.com'
+})
+const database = firebaseApp.database()
 
 export default {
   data () {
@@ -64,6 +76,24 @@ export default {
         perPage: 20
       },
       countProducts: 0
+    }
+  },
+  firebase: {
+    dbItems: {
+      source: database.ref('/items'),
+      dbItems: true,
+      readyCallback: function () {
+        let slug = this.$route.params.slug
+        if (slug) {
+          if (slug === 'eldorado') {
+            this.itemsHandle(this.dbItems.filter((e) => e.store === 'Eldorado'), 'в Эльдорадо')
+          } else if (slug === 'mvideo') {
+            this.itemsHandle(this.dbItems.filter((e) => e.store === 'Mvideo'), 'в Мвидео')
+          } else {
+            this.itemsHandle(this.dbItems, 'во всех магазинах')
+          }
+        }
+      }
     }
   },
   methods: {
@@ -94,11 +124,11 @@ export default {
     getItems () {
       let page = this.$route.params.page || 1
       let perPage = this.pagination.perPage
-      this.items = this.rootItems.slice((page - 1) * perPage, perPage * page)
+      this.items = this.dbItems.slice((page - 1) * perPage, perPage * page)
     },
     applyPriceFilter (priceRange) {
       let filteredItems = []
-      for (let itm of this.rootItems) {
+      for (let itm of this.dbItems) {
         let price = parseInt(itm.newPrice.replace(/\s/g, ''))
         if (price >= priceRange.from && price <= priceRange.to) {
           filteredItems.push(itm)
@@ -111,18 +141,6 @@ export default {
     this.$bus.$on('change-price', (obj) => {
       this.applyPriceFilter(obj)
     })
-  },
-  created () {
-    let slug = this.$route.params.slug
-    if (slug) {
-      if (slug === 'eldorado') {
-        this.itemsHandle(EldoradoItems.items, 'в Эльдорадо')
-      } else if (slug === 'mvideo') {
-        this.itemsHandle(MvideoItems.items, 'в Мвидео')
-      } else {
-        this.itemsHandle(EldoradoItems.items.concat(MvideoItems.items), 'во всех магазинах')
-      }
-    }
   },
   computed: {
     maxPrice () {
@@ -145,15 +163,15 @@ export default {
     'selectedStore': function () {
       switch (this.selectedStore) {
         case 'eldorado':
-          this.itemsHandle(EldoradoItems.items, 'в Эльдорадо', true)
+          this.itemsHandle(this.dbItems.filter((e) => e.store === 'Eldorado'), 'в Эльдорадо', true)
           // this.$router.replace({ path: `${this.$route.path}?store=eldorado` })
           break
         case 'mvideo':
-          this.itemsHandle(MvideoItems.items, 'в Мвидео', true)
+          this.itemsHandle(this.dbItems.filter((e) => e.store === 'Mvideo'), 'в Мвидео', true)
           // this.$router.replace({ path: `${this.$route.path}?store=mvideo` })
           break
         default:
-          this.itemsHandle(EldoradoItems.items.concat(MvideoItems.items), 'во всех магазинах', true)
+          this.itemsHandle(this.dbItems, 'во всех магазинах', true)
       }
     },
     '$route': 'getItems'

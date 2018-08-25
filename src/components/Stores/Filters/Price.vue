@@ -51,6 +51,12 @@ export default {
     switchFilter () {
       this.$bus.$emit('change-price', { from: parseInt(this.value[0]), to: parseInt(this.value[1]) })
     }
+  },
+  watch: {
+    'maxPrice': function () {
+      this.value[1] = this.maxPrice
+      this.options.max = this.maxPrice
+    }
   }
 }
 </script>

@@ -2,178 +2,228 @@
  "items": [
   {
    "title": "LED телевизор\r\n                                      SAMSUNG UE32M4000AU",
-   "oldPrice": "16 999 ",
-   "newPrice": "14 999 ",
+   "newPrice": "16 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/600/83/new_71360083_l_1504502367.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 1,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Кофемашина\r\n                                      DELONGHI ECAM 22.110 B Magnifica S",
-   "oldPrice": "25 999 ",
-   "newPrice": "22 999 ",
+   "newPrice": "25 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/710/748/23/new_71074823_l_715.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 2,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Холодильник\r\n                                      LG GA-B499YLUZ",
    "oldPrice": "40 999 ",
    "newPrice": "35 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/683/20/new_71368320_l_1512645967.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 3,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Ноутбук\r\n                                      LENOVO IdeaPad 320-15AST (80XV000RRK) (AMD E2-9000 1800Mhz/15.6\"/1366x768/4Gb/500Gb/AMD Radeon R2/Wi-Fi/Bluetooth/Win10)",
    "oldPrice": "18 990 ",
    "newPrice": "15 990 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/684/69/new_71368469_l_1513265175.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 4,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Стиральная машина\r\n                                      LG FH0H4NDS0",
-   "oldPrice": "27 999 ",
-   "newPrice": "21 999 ",
+   "newPrice": "27 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/711/948/71/new_71194871_l_1471032190.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 5,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Кухонная машина\r\n                                      BOSCH MUM48SL",
-   "oldPrice": "10 499 ",
-   "newPrice": "6 999 ",
+   "newPrice": "10 499 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/730/23/new_71373023_l_1523615381.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 6,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Утюг\r\n                                      TEFAL Aquaspeed FV5540",
    "oldPrice": "6 999 ",
-   "newPrice": "3 999 ",
+   "newPrice": "4 499 ",
    "imageLink": "https://www.eldorado.ru/photos/71/712/213/25/new_71221325_l_1480115497.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 7,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "LED телевизор\r\n                                      FUSION FLTV-43T100T",
    "oldPrice": "21 999 ",
-   "newPrice": "15 999 ",
+   "newPrice": "18 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/699/75/new_71369975_l_1517561524.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 8,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Смартфон\r\n                                      MEIZU M5 Note M621H 16Gb Gold",
    "oldPrice": "10 990 ",
    "newPrice": "8 490 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/525/33/new_71352533_l_1500849538.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 9,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Вентилятор напольный\r\n                                      SCARLETT SC-SF111RC03",
-   "oldPrice": "1 999 ",
+   "oldPrice": "1 799 ",
    "newPrice": "1 499 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/712/62/new_71371262_l_1520326225.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 10,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Встраиваемая посудомоечная машина\r\n                                      SIEMENS SR615X20IR",
    "oldPrice": "32 799 ",
    "newPrice": "25 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/661/14/new_71366114_l_1511800913.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 11,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Электрический духовой шкаф\r\n                                      BOSCH HBA514ES0",
    "oldPrice": "36 199 ",
    "newPrice": "28 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/713/19/new_71371319_l_1520859183.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 12,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Ultra HD (4K) LED телевизор\r\n                                      SAMSUNG UE40MU6100UXRU",
-   "oldPrice": "35 999 ",
-   "newPrice": "33 999 ",
-   "imageLink": "https://www.eldorado.ru/photos/71/713/329/93/new_71332993_l_1526903465.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "newPrice": "35 999 ",
+   "imageLink": "https://www.eldorado.ru/photos/71/713/329/93/new_71332993_l_1494929716.jpeg/resize/499x499/",
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 13,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Пылесос\r\n                                      POLARIS PVC 1821 WR",
-   "oldPrice": "5 999 ",
-   "newPrice": "4 499 ",
+   "newPrice": "5 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/711/928/92/new_71192892_l_1478784775.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 14,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Стиральная машина\r\n                                      SAMSUNG WW65J42E04W",
    "oldPrice": "27 499 ",
    "newPrice": "25 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/464/97/new_71346497_l_1500369664.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 15,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "LED телевизор\r\n                                      SAMSUNG UE49M6500UXRU",
-   "oldPrice": "45 999 ",
    "newPrice": "39 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/421/84/new_71342184_l_1496299307.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 16,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Холодильник\r\n                                      SAMSUNG RB-37J5450WW/WT",
-   "oldPrice": "45 999 ",
-   "newPrice": "42 999 ",
+   "newPrice": "46 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/711/207/82/new_71120782_l_1512711893.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 17,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Фен\r\n                                      REMINGTON D3015",
-   "oldPrice": "2 299 ",
-   "newPrice": "999 ",
+   "newPrice": "2 299 ",
    "imageLink": "https://www.eldorado.ru/photos/71/711/711/57/new_71171157_l_1459752645.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 18,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Ноутбук\r\n                                      IRBIS NB131 (Intel Celeron N3350 1.1GHz/14.1\"/1920x1080/3GB/32GB SSD/Intel HD Graphics/DVD нет/Wi-Fi/Bluetooth/Cam/Windows 10)",
    "oldPrice": "15 990 ",
    "newPrice": "12 990 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/722/06/new_71372206_l_1523259012.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "store": "Eldorado",
+   "id": 19,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Микроволновая печь\r\n                                      LG NeoCHef MS2336GIH",
-   "oldPrice": "9 999 ",
-   "newPrice": "8 499 ",
+   "newPrice": "9 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/271/87/new_71327187_l_1494581683.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 20,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Пылесос\r\n                                      SAMSUNG SC18M31B0HN",
-   "oldPrice": "8 999 ",
    "newPrice": "7 999 ",
    "imageLink": "https://www.eldorado.ru/photos/71/712/398/03/new_71239803_l_1515674632.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 21,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Микроволновая печь\r\n                                      SAMSUNG ME83KRS-1",
-   "oldPrice": "7 399 ",
-   "newPrice": "6 499 ",
+   "newPrice": "7 399 ",
    "imageLink": "https://www.eldorado.ru/photos/71/711/019/80/new_71101980_l_153.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 22,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Монитор\r\n                                      ACER R241Ywid",
-   "oldPrice": "9 990 ",
-   "newPrice": "9 490 ",
+   "newPrice": "9 990 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/754/47/new_71375447_l_1530117609.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 23,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Ultra HD (4K) LED телевизор\r\n                                      LG 43UK6550PLD",
-   "oldPrice": "40 999 ",
    "newPrice": "39 999 ",
-   "imageLink": "https://www.eldorado.ru/photos/71/713/727/35/new_71372735_l_1527006066.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "imageLink": "https://www.eldorado.ru/photos/71/713/727/35/new_71372735_l_1524058181.jpeg/resize/499x499/",
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 24,
+   "created_at": "2018-08-18T12:44:50.620Z"
   },
   {
    "title": "Сковорода\r\n                                      TEFAL Extra 28 см.",
-   "oldPrice": "1 499 ",
-   "newPrice": "1 099 ",
+   "newPrice": "1 499 ",
    "imageLink": "https://www.eldorado.ru/photos/71/713/489/88/new_71348988_l_1519737424.jpeg/resize/499x499/",
-   "store": "Eldorado"
+   "oldPrice": "",
+   "store": "Eldorado",
+   "id": 25,
+   "created_at": "2018-08-18T12:44:50.620Z"
   }
  ]
 }
