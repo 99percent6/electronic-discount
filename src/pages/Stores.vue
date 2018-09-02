@@ -1,5 +1,5 @@
 <template>
-  <div id="stores" class="content-container">
+  <div id="stores" class="stores-container-page">
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Товары со скидками {{ store }}</h2>
     </div>
@@ -75,7 +75,8 @@ export default {
       pagination: {
         perPage: 20
       },
-      countProducts: 0
+      countProducts: 0,
+      priceRange: null
     }
   },
   firebase: {
@@ -124,7 +125,22 @@ export default {
     getItems () {
       let page = this.$route.params.page || 1
       let perPage = this.pagination.perPage
-      this.items = this.dbItems.slice((page - 1) * perPage, perPage * page)
+      let filteredItems = []
+      if (this.priceRange) {
+        for (let itm of this.dbItems) {
+          let price = parseInt(itm.newPrice.replace(/\s/g, ''))
+          if (price >= this.priceRange.from && price <= this.priceRange.to) {
+            filteredItems.push(itm)
+          }
+        }
+        this.countProducts = filteredItems.length
+        filteredItems = filteredItems.slice((page - 1) * perPage, perPage * page)
+        this.items = filteredItems
+        return
+      }
+      filteredItems = this.dbItems.slice((page - 1) * perPage, perPage * page)
+      this.items = filteredItems
+      this.countProducts = this.dbItems.length
     },
     applyPriceFilter (priceRange) {
       let filteredItems = []
@@ -139,7 +155,8 @@ export default {
   },
   beforeMount () {
     this.$bus.$on('change-price', (obj) => {
-      this.applyPriceFilter(obj)
+      this.priceRange = obj
+      this.getItems()
     })
   },
   computed: {
@@ -183,7 +200,7 @@ export default {
 #stores .product-listing .product {
   width: 300px;
 }
-.content-container {
+.stores-container-page {
   box-sizing: border-box;
   background-color: #e8edee;
   height: auto;

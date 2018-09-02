@@ -1,5 +1,5 @@
 <template>
-  <div class="price-filter">
+  <div v-show="maxPrice !== 0" class="price-filter">
     <div class="price-title">
       Цена
     </div>
@@ -22,10 +22,10 @@ export default {
     return {
       value: [
         0,
-        this.maxPrice
+        1000000
       ],
       options: {
-        max: this.maxPrice,
+        max: 1000000,
         tooltip: false,
         sliderStyle: {
           'backgroundColor': '#FFFFFF'
@@ -40,8 +40,7 @@ export default {
   },
   props: {
     maxPrice: {
-      type: Number,
-      default: 100000
+      type: Number
     }
   },
   components: {
@@ -54,8 +53,10 @@ export default {
   },
   watch: {
     'maxPrice': function () {
-      this.value[1] = this.maxPrice
-      this.options.max = this.maxPrice
+      if (this.maxPrice !== 0) {
+        this.options.max = this.maxPrice
+        this.value = [0, this.maxPrice]
+      }
     }
   }
 }

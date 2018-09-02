@@ -67,7 +67,7 @@ export default {
   position: relative;
 }
 .content-container {
-  background-color: #e8edee;
+  background-color: #f2f7f9;
   width: 70vw;
   margin: 0 auto;
 }
@@ -75,7 +75,7 @@ export default {
   margin: 0 auto;
 }
 .stores {
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.7); */
   padding-top: 70px;
 }
 .stores-logo {
@@ -86,9 +86,4 @@ img {
   width: 200px;
   margin: 20px;
 }
-/* @media (max-width: 480px) {
-  img {
-    width: 100px;
-  }
-} */
 </style>

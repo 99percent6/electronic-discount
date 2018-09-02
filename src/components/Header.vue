@@ -1,14 +1,16 @@
 <template>
   <div id="header">
     <div class="header relative col-xs-12 flex middle-xs center-xs">
-      <div class="logo absolute">
+      <div class="logo col-xs-3">
         <router-link :to="{ name: 'Home' }">
-          <img src="../../static/Logotip.png">
+          <img src="../../static/Logotip2.png">
         </router-link>
       </div>
-      <div class="navigation">
-        <router-link :to="{ name: 'Stores', params: { slug: 'all' } }">Все акции</router-link>
+      <div class="navigation col-xs-6">
+        <router-link :to="{ name: 'Stores', params: { slug: 'all' } }">Акции</router-link>
+        <router-link :to="{ path: '/' }">Магазины</router-link>
       </div>
+      <div class="col-xs-3" />
     </div>
   </div>
 </template>
@@ -20,15 +22,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#header {
+  background-color: white;
+}
 .header {
   box-sizing: border-box;
   padding: 0 20px;
-  width: 100%;
+  width: 70vw;
+  margin: 0 auto;
   height: 60px;
-  background-color: rgba(0, 0, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
   color: white;
   z-index: 5;
 }
@@ -38,8 +40,11 @@ export default {
 .navigation a {
   margin-right: 30px;
   font-weight: bold;
-  color: #3ed1cd;
+  color: black;
   text-decoration: none;
+}
+.navigation a:hover {
+  color: #276eef;
 }
 img {
   height: 50px;
