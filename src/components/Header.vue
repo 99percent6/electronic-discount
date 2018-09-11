@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <div class="header relative col-xs-12 flex middle-xs center-xs">
-      <div class="logo col-xs-3">
+      <div class="logo col-xs-3 flex start-xs">
         <router-link :to="{ name: 'Home' }">
           <img src="../../static/Logotip2.png">
         </router-link>

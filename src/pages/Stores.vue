@@ -52,7 +52,7 @@ const firebaseApp = firebase.initializeApp({
   projectId: 'electronic-discounter',
   databaseURL: 'https://electronic-discounter.firebaseio.com'
 })
-const database = firebaseApp.database()
+export const database = firebaseApp.database()
 
 export default {
   data () {

@@ -25,6 +25,7 @@ import EldoradoItems from '../../stores/data/eldorado.json'
 import MvideoItems from '../../stores/data/mvideo.json'
 import SearchPanel from '../components/search.vue'
 import Stores from '../components/Stores/Stores.vue'
+import { database } from './Stores.vue'
 
 export default {
   data () {
@@ -32,6 +33,14 @@ export default {
       eldoItems: [],
       mvideoItems: []
     }
+  },
+  firebase: {
+    // dbItems: {
+    //   source: database.ref('/items').limitToFirst(10),
+    //   dbItems: true
+    // }
+    dbItems: database.ref('/items').limitToFirst(10),
+    dbItems2: database.ref('/items').orderByChild('store').equalTo('Mvideo')
   },
   created () {
     for (let item of EldoradoItems.items) {
@@ -41,6 +50,14 @@ export default {
     for (let item of MvideoItems.items) {
       Object.assign(item, { store: 'Mvideo' })
       this.mvideoItems.push(item)
+    }
+  },
+  computed: {
+    items () {
+      return this.dbItems
+    },
+    items2 () {
+      return this.dbItems2
     }
   },
   components: {
