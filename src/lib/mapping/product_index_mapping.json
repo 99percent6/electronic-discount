@@ -1,0 +1,32 @@
+{
+  "mappings": {
+    "product_item": {
+      "properties": {
+        "title": {
+          "type": "text"
+        },
+        "oldPrice": {
+          "type": "double"
+        },
+        "newPrice": {
+          "type": "double"
+        },
+        "imageLink": {
+          "type": "text"
+        },
+        "store": {
+          "type": "keyword"
+        },
+        "created":  {
+          "type":   "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        }
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "number_of_shards": "5"
+    }
+  }
+}

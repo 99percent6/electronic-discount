@@ -15,9 +15,11 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ProductTile from './ProductTile.vue'
+import { quickSearchByQuery } from '../lib/search.js'
+import builder from 'bodybuilder'
 
 export default {
-  props: ['items', 'imgLink'],
+  props: ['store', 'imgLink'],
   data () {
     return {
       swiperOption: {
@@ -41,13 +43,26 @@ export default {
           }
         }
       },
-      swiperSlides: this.items
+      swiperSlides: []
     }
   },
   components: {
     swiper,
     swiperSlide,
     ProductTile
+  },
+  created () {
+    this.loadItems()
+  },
+  methods: {
+    loadItems () {
+      let query = builder().query('term', 'store', this.store)
+      quickSearchByQuery({ query: query.build(), size: 10 }).then(res => {
+        if (res && res.hits) {
+          this.swiperSlides = res.hits.hits
+        }
+      })
+    }
   },
   computed: {
     imageObj () {

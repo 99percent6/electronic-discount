@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     switchFilter () {
-      this.$bus.$emit('change-price', { from: parseInt(this.value[0]), to: parseInt(this.value[1]) })
+      this.$router.replace({ path: `${this.$route.path}?from=${parseInt(this.value[0])}&to=${parseInt(this.value[1])}` })
     }
   },
   watch: {
@@ -56,6 +56,11 @@ export default {
       if (this.maxPrice !== 0) {
         this.options.max = this.maxPrice
         this.value = [0, this.maxPrice]
+        let minPrice = this.$route.query.from
+        let maxPrice = this.$route.query.to
+        if (minPrice || maxPrice) {
+          this.value = [minPrice, maxPrice]
+        }
       }
     }
   }

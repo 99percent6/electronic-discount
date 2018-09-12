@@ -9,7 +9,7 @@
         <span class="pointer" :class="hide ? 'arrow-up' : ''">&#8250;</span>
       </div>
       <div class="all-filters flex flex-wrap" :class="hide ? 'hide' : ''">
-        <div v-if="$route.params.slug === 'all'" class="store-filter col-xs-12 col-md-2">
+        <div class="store-filter col-xs-12 col-md-2">
           <div class="name">
             Магазин
           </div>
@@ -37,28 +37,15 @@
 
 <script>
 import ProductTile from '../components/ProductTile.vue'
-// import EldoradoItems from '../../stores/data/eldorado.json'
-// import MvideoItems from '../../stores/data/mvideo.json'
 import Pagination from '../components/Pagination.vue'
 import PriceFilter from '../components/Stores/Filters/Price.vue'
-// import { database } from '../main.js'
-import Vue from 'vue'
-import VueFire from 'vuefire'
-import firebase from 'firebase/app'
-import 'firebase/database'
-
-Vue.use(VueFire)
-const firebaseApp = firebase.initializeApp({
-  projectId: 'electronic-discounter',
-  databaseURL: 'https://electronic-discounter.firebaseio.com'
-})
-export const database = firebaseApp.database()
+import builder from 'bodybuilder'
+import { quickSearchByQuery } from '../lib/search.js'
 
 export default {
   data () {
     return {
       items: [],
-      rootItems: [],
       store: '',
       storeList: [
         {
@@ -76,99 +63,76 @@ export default {
         perPage: 20
       },
       countProducts: 0,
-      priceRange: null
+      maxPrice: 0
     }
   },
-  firebase: {
-    dbItems: {
-      source: database.ref('/items'),
-      dbItems: true,
-      readyCallback: function () {
-        let slug = this.$route.params.slug
-        if (slug) {
-          if (slug === 'eldorado') {
-            this.itemsHandle(this.dbItems.filter((e) => e.store === 'Eldorado'), 'в Эльдорадо')
-          } else if (slug === 'mvideo') {
-            this.itemsHandle(this.dbItems.filter((e) => e.store === 'Mvideo'), 'в Мвидео')
-          } else {
-            this.itemsHandle(this.dbItems, 'во всех магазинах')
-          }
-        }
-      }
+  created () {
+    let slug = this.$route.params.slug
+    if (slug) {
+      this.selectedStore = slug
     }
+    this.loadItems()
+    this.getMaxPrice()
   },
   methods: {
+    loadItems () {
+      let slug = this.$route.params.slug
+      let page = this.$route.params.page || 1
+      let minPrice = this.$route.query.from || null
+      let maxPrice = this.$route.query.to || null
+      let query = null
+      if (slug !== 'all') {
+        if (slug === 'eldorado') {
+          query = builder().query('term', 'store', 'Eldorado')
+        }
+        if (slug === 'mvideo') {
+          query = builder().query('term', 'store', 'Mvideo')
+        }
+      }
+      if (minPrice || maxPrice) {
+        if (query) {
+          query = query.query('range', { 'newPrice': { 'gte': minPrice, 'lte': maxPrice } })
+        } else {
+          query = builder().query('range', { 'newPrice': { 'gte': minPrice, 'lte': maxPrice } })
+        }
+      }
+      quickSearchByQuery({ query: query ? query.build() : {}, size: this.pagination.perPage, from: (page - 1) * this.pagination.perPage }).then(res => {
+        if (res && res.hits) {
+          this.countProducts = res.hits.total
+          this.items = res.hits.hits
+        }
+      })
+    },
+    getMaxPrice () {
+      let slug = this.$route.params.slug
+      let query = builder().aggregation('terms', 'new')
+      if (slug) {
+        if (slug === 'all') {
+          query = builder()
+        }
+        if (slug === 'eldorado') {
+          query = builder().query('term', 'store', 'Eldorado')
+        }
+        if (slug === 'mvideo') {
+          query = builder().query('term', 'store', 'Mvideo')
+        }
+        quickSearchByQuery({ query: query.build(), size: 1, sort: 'newPrice:desc' }).then(res => {
+          if (res && res.hits && res.hits.total > 0) {
+            this.maxPrice = res.hits.hits[0].newPrice
+          }
+        })
+      }
+    },
     selectStore (store) {
+      this.resetPage()
       if (this.selectedStore === store) {
         this.selectedStore = ''
       } else {
         this.selectedStore = store
       }
     },
-    itemsHandle (items, text, resetPagination = false) {
-      this.items = items.slice(0, this.pagination.perPage)
-      this.store = text
-      this.countProducts = items.length
-      this.rootItems = items
-      let page = this.$route.params.page || 1
-      let store = this.$route.query.store
-      if (resetPagination) {
-        this.$router.push({ name: this.$route.name, params: { page: 1 } })
-      }
-      if (page !== 1) {
-        this.getItems()
-      }
-      if (store) {
-        this.selectedStore = store
-      }
-    },
-    getItems () {
-      let page = this.$route.params.page || 1
-      let perPage = this.pagination.perPage
-      let filteredItems = []
-      if (this.priceRange) {
-        for (let itm of this.dbItems) {
-          let price = parseInt(itm.newPrice.replace(/\s/g, ''))
-          if (price >= this.priceRange.from && price <= this.priceRange.to) {
-            filteredItems.push(itm)
-          }
-        }
-        this.countProducts = filteredItems.length
-        filteredItems = filteredItems.slice((page - 1) * perPage, perPage * page)
-        this.items = filteredItems
-        return
-      }
-      filteredItems = this.dbItems.slice((page - 1) * perPage, perPage * page)
-      this.items = filteredItems
-      this.countProducts = this.dbItems.length
-    },
-    applyPriceFilter (priceRange) {
-      let filteredItems = []
-      for (let itm of this.dbItems) {
-        let price = parseInt(itm.newPrice.replace(/\s/g, ''))
-        if (price >= priceRange.from && price <= priceRange.to) {
-          filteredItems.push(itm)
-        }
-      }
-      this.items = filteredItems
-    }
-  },
-  beforeMount () {
-    this.$bus.$on('change-price', (obj) => {
-      this.priceRange = obj
-      this.getItems()
-    })
-  },
-  computed: {
-    maxPrice () {
-      let maxPrice = 0
-      for (let itm of this.rootItems) {
-        let price = parseInt(itm.newPrice.replace(/\s/g, ''))
-        if (price > maxPrice) {
-          maxPrice = price
-        }
-      }
-      return maxPrice
+    resetPage () {
+      this.$route.params.page = 1
     }
   },
   components: {
@@ -178,20 +142,20 @@ export default {
   },
   watch: {
     'selectedStore': function () {
+      let query = this.$route.query
       switch (this.selectedStore) {
         case 'eldorado':
-          this.itemsHandle(this.dbItems.filter((e) => e.store === 'Eldorado'), 'в Эльдорадо', true)
-          // this.$router.replace({ path: `${this.$route.path}?store=eldorado` })
+          this.$router.replace({ name: this.$route.name, params: { slug: 'eldorado' }, query: query || '' })
           break
         case 'mvideo':
-          this.itemsHandle(this.dbItems.filter((e) => e.store === 'Mvideo'), 'в Мвидео', true)
-          // this.$router.replace({ path: `${this.$route.path}?store=mvideo` })
+          this.$router.replace({ name: this.$route.name, params: { slug: 'mvideo' }, query: query || '' })
           break
         default:
-          this.itemsHandle(this.dbItems, 'во всех магазинах', true)
+          this.$router.replace({ name: this.$route.name, params: { slug: 'all' }, query: query || '' })
       }
+      this.getMaxPrice()
     },
-    '$route': 'getItems'
+    '$route': 'loadItems'
   }
 }
 </script>

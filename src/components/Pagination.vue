@@ -28,14 +28,11 @@ export default {
       let currentRoute = this.$route.name
       currentRoute = this.routerChoice[currentRoute] ? this.routerChoice[currentRoute] : currentRoute
       let params = this.$route.params
-      let store = this.$route.query.store
+      let query = this.$route.query
       if (newPage !== this.activePage) {
         params.page = newPage
         this.activePage = Number(newPage)
-        this.$router.push({name: currentRoute, params: params})
-        if (store) {
-          this.$router.push({ path: `${this.$route.path}?store=${store}` })
-        }
+        this.$router.push({name: currentRoute, params: params, query: query || ''})
       }
     },
     getPageCount () {
