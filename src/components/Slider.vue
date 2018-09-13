@@ -23,9 +23,6 @@ export default {
   data () {
     return {
       swiperOption: {
-        autoplay: {
-          delay: 3000
-        },
         slidesPerView: 4,
         spaceBetween: 20,
         pagination: {

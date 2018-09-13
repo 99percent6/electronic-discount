@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .product {
+  border: 1px solid #ABABAB;
   padding-top: 25px;
   padding-bottom: 5px;
   background-color: white;
@@ -87,7 +88,7 @@ export default {
 }
 .store {
   right: 10px;
-  bottom: 10px;
+  top: 5px;
 }
 .store img {
   height: 20px;

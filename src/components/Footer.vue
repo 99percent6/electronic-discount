@@ -14,10 +14,10 @@ export default {
 <style lang="css" scoped>
 .footer {
   border-top: 2px solid #c7bfbf;
-  background-color: #e7e1e1;
-  width: 70vw;
-  margin: 0 auto;
+  background-color: #3d3c42;
+  width: 100%;
   height: 100px;
+  color: #737d82;
 }
 .content {
   height: 100%;

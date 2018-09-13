@@ -19,7 +19,8 @@ export default {
       pageSize: 24,
       pageCount: 0,
       routerChoice: {
-        'Stores': 'Stores-page'
+        'Stores': 'Stores-page',
+        'Search': 'Search-page'
       }
     }
   },

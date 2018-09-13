@@ -22,17 +22,20 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#header {
-  background-color: white;
-}
 .header {
   box-sizing: border-box;
   padding: 0 20px;
-  width: 70vw;
+  width: 100vw;
   margin: 0 auto;
   height: 60px;
   color: white;
   z-index: 5;
+  position: absolute;
+  transition: 0.3s all;
+}
+.header:hover {
+  background-color: white;
+  transition: 0.3s all;
 }
 .logo {
   left: 10px;

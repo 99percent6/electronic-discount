@@ -66,7 +66,7 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   flex-direction: column;
-  box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+  box-shadow: 0 0 40px 0 rgba(0,0,0,.6);
 }
 .store-card-image {
   height: 125px;
