@@ -3,7 +3,8 @@
     "product_item": {
       "properties": {
         "title": {
-          "type": "text"
+          "type": "text",
+          "fielddata": true
         },
         "oldPrice": {
           "type": "double"

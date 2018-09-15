@@ -48,7 +48,12 @@ export default {
   },
   methods: {
     switchFilter () {
-      this.$router.replace({ path: `${this.$route.path}?from=${parseInt(this.value[0])}&to=${parseInt(this.value[1])}` })
+      let query = this.$route.query
+      let sort = ''
+      if (query && query.sort) {
+        sort = `sort=${query.sort}`
+      }
+      this.$router.replace({ path: `${this.$route.path}?${sort}&from=${parseInt(this.value[0])}&to=${parseInt(this.value[1])}` })
     }
   },
   watch: {

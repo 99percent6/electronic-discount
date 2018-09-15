@@ -7,13 +7,12 @@
       <div class="store col-xs-12 center-xs middle-xs">
         <stores />
       </div>
-      <div class="products col-xs-12 center-xs middle-xs">
-        <div class="title">
-          <h2>Текущие акции</h2>
-        </div>
-        <slider store="Eldorado" imgLink="/static/stores/eldorado.png"/>
-        <slider store="Mvideo" imgLink="/static/stores/mvideo.png"/>
+    </div>
+    <div class="products col-xs-12 center-xs middle-xs">
+      <div class="title">
+        <h2>Текущие акции</h2>
       </div>
+      <slider />
     </div>
   </div>
 </template>
@@ -43,6 +42,7 @@ export default {
   height: 80vh;
   width: 100%;
   background-image: url('../assets/background.jpg');
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 -100px;

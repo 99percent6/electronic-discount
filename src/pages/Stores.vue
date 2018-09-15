@@ -3,28 +3,31 @@
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Товары со скидками {{ store }}</h2>
     </div>
-    <div class="col-xs-12 filters">
-      <div class="filter-title flex middle-xs">
-        <h3 @click="hide = !hide" class="pointer">Фильтры</h3>
-        <span class="pointer" :class="hide ? 'arrow-up' : ''">&#8250;</span>
-      </div>
-      <div class="all-filters flex flex-wrap" :class="hide ? 'hide' : ''">
-        <div class="store-filter col-xs-12 col-md-2">
-          <div class="name">
-            Магазин
-          </div>
-          <div class="store-list">
-            <div class="" v-for="(store, index) in storeList" :key="index">
-              <input type="radio" :name="store.name" value=""
-                :checked="selectedStore === store.name" @click="selectStore(store.name)">
-              <label :class="selectedStore === store.name ? 'active-input' : ''" :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
+    <div class="col-xs-12 flex">
+      <div class="filters col-xs-6">
+        <div class="filter-title flex middle-xs">
+          <h3 @click="hide = !hide" class="pointer">Фильтры</h3>
+          <span class="pointer" :class="hide ? 'arrow-up' : ''">&#8250;</span>
+        </div>
+        <div class="all-filters flex flex-wrap" :class="hide ? 'hide' : ''">
+          <div class="store-filter col-xs-12 col-md-4">
+            <div class="name">
+              Магазин
+            </div>
+            <div class="store-list">
+              <div class="" v-for="(store, index) in storeList" :key="index">
+                <input type="radio" :name="store.name" value=""
+                  :checked="selectedStore === store.name" @click="selectStore(store.name)">
+                <label :class="selectedStore === store.name ? 'active-input' : ''" :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-md-2">
-          <price-filter :max-price="maxPrice"/>
+          <div class="col-xs-12 col-md-4">
+            <price-filter :max-price="maxPrice"/>
+          </div>
         </div>
       </div>
+      <sorting class="col-xs-6" />
     </div>
     <div class="product-listing flex between-xs flex-wrap">
       <div class="" v-for="(product, index) in items" :key="index">
@@ -39,6 +42,7 @@
 import ProductTile from '../components/ProductTile.vue'
 import Pagination from '../components/Pagination.vue'
 import PriceFilter from '../components/Stores/Filters/Price.vue'
+import Sorting from '../components/Stores/Sorting.vue'
 import builder from 'bodybuilder'
 import { quickSearchByQuery } from '../lib/search.js'
 
@@ -76,10 +80,23 @@ export default {
   },
   methods: {
     loadItems () {
+      let self = this
       let slug = this.$route.params.slug
       let page = this.$route.params.page || 1
       let minPrice = this.$route.query.from || null
       let maxPrice = this.$route.query.to || null
+      let sort = function () {
+        let currentSort = self.$route.query.sort || null
+        if (currentSort && currentSort !== 'Умолчанию') {
+          if (currentSort === 'Убыванию цены') {
+            return 'newPrice:desc'
+          } else {
+            return 'newPrice:asc'
+          }
+        } else {
+          return 'title:asc'
+        }
+      }
       let query = null
       if (slug !== 'all') {
         if (slug === 'eldorado') {
@@ -96,7 +113,7 @@ export default {
           query = builder().query('range', { 'newPrice': { 'gte': minPrice, 'lte': maxPrice } })
         }
       }
-      quickSearchByQuery({ query: query ? query.build() : {}, size: this.pagination.perPage, from: (page - 1) * this.pagination.perPage }).then(res => {
+      quickSearchByQuery({ query: query ? query.build() : {}, size: this.pagination.perPage, from: (page - 1) * this.pagination.perPage, sort: sort() }).then(res => {
         if (res && res.hits) {
           this.countProducts = res.hits.total
           this.items = res.hits.hits
@@ -138,7 +155,8 @@ export default {
   components: {
     ProductTile,
     Pagination,
-    PriceFilter
+    PriceFilter,
+    Sorting
   },
   watch: {
     'selectedStore': function () {
@@ -160,14 +178,16 @@ export default {
 }
 </script>
 
-<style lang="css">
-#stores .product-listing .product {
-  width: 300px;
+<style lang="scss">
+#stores {
+  z-index: 1;
+  background: #f7f6f2;
+  .product-listing .product {
+    width: 300px;
+  }
 }
 .stores-container-page {
-  margin-top: 60px;
   box-sizing: border-box;
-  background-color: #e8edee;
   height: auto;
   width: 70vw;
   margin: 0 auto;

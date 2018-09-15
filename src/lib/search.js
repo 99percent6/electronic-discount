@@ -2,7 +2,7 @@ import request from 'request'
 const esHost = 'localhost:9200'
 const esIndex = 'product_catalog'
 
-export function quickSearchByQuery ({ query = {}, size = 20, from = 0, sort = '' }) {
+export function quickSearchByQuery ({ query = {}, size = 20, from = 0, sort = 'title:asc' }) {
   return new Promise(function (resolve, reject) {
     return request({
       url: `http://${esHost}/${esIndex}/_search?size=${size}&from=${from}&sort=${sort}`,
