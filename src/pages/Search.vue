@@ -21,7 +21,7 @@ import ProductTile from '../components/ProductTile.vue'
 import Pagination from '../components/Pagination.vue'
 import SearchPanel from '../components/search.vue'
 import builder from 'bodybuilder'
-import { quickSearchByQuery } from '../lib/search.js'
+import { quickSearchByQuery } from '../helpers/search.js'
 
 export default {
   data () {

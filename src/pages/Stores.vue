@@ -44,7 +44,7 @@ import Pagination from '../components/Pagination.vue'
 import PriceFilter from '../components/Stores/Filters/Price.vue'
 import Sorting from '../components/Stores/Sorting.vue'
 import builder from 'bodybuilder'
-import { quickSearchByQuery } from '../lib/search.js'
+import { quickSearchByQuery } from '../helpers/search.js'
 
 export default {
   data () {

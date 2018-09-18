@@ -17,7 +17,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ProductTile from './ProductTile.vue'
-import { quickSearchByQuery } from '../lib/search.js'
+import { quickSearchByQuery } from '../helpers/search.js'
 
 export default {
   data () {

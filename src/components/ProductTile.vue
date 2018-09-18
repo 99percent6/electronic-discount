@@ -9,7 +9,7 @@
       </div>
       <div class="product-price">
         <span class="new-price">{{ `${product.newPrice} &#8381;` }}</span>
-        <span class="old-price">{{ `${product.oldPrice} &#8381;` }}</span>
+        <span v-if="product.oldPrice" class="old-price">{{ `${product.oldPrice} &#8381;` }}</span>
       </div>
       <div class="store absolute">
         <img :src="getLogoLink(product.store)">
@@ -45,25 +45,31 @@ export default {
 <style lang="scss" scoped>
 .product {
   border: 1px solid #ABABAB;
-  padding-top: 25px;
+  padding-top: 35px;
   padding-bottom: 5px;
   background-color: white;
   height: auto;
-  min-height: 280px;
+  min-height: 300px;
   border-radius: 5px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 15px;
   box-sizing: border-box;
   position: relative;
   transition: 0.3s all;
-  &:hover {
-    margin-top: -5px;
-    box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+  &:hover .product-image img {
+    // margin-top: -5px;
+    // box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+    transform: scale(1.2, 1.2);
+    transition: 0.3s all;
   }
+}
+.product-descr {
+  margin-top: 7px;
 }
 .product-name {
   font-size: 13px;
   word-wrap: break-word;
+  transition: 0.3s all;
 }
 .product-price {
   position: absolute;
@@ -71,20 +77,25 @@ export default {
   left: 15px;
 }
 .new-price {
-  color: green;
+  font-weight: bold;
   margin-right: 5px;
 }
 .old-price {
   font-size: 13px;
-  color: red;
+  color: #b3b3b3;
   text-decoration: line-through;
 }
-.product-image img {
-  height: 170px;
-  width: 100%;
-  object-fit: contain;
-  max-width: 242px;
-  margin-bottom: 5px;
+.product-image {
+  overflow: hidden;
+  img {
+    height: 170px;
+    width: 100%;
+    object-fit: contain;
+    max-width: 242px;
+    margin-bottom: 5px;
+    transition: scale(1, 1);
+    transition: 0.3s all;
+  }
 }
 .store {
   right: 10px;
