@@ -11,8 +11,11 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
+    "parse-all-shops": "npm run eldo && npm run mvideo",
     "eldo": "node stores/eldorado",
-    "mvideo": "node stores/mvideo"
+    "mvideo": "node stores/mvideo",
+    "create-common-json": "node stores/common",
+    "create-index": "node stores/create-index"
   },
   "dependencies": {
     "axios": "^0.18.0",

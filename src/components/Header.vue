@@ -6,9 +6,10 @@
           <img src="../../static/Logotip2.png">
         </router-link>
       </div>
-      <div class="navigation col-xs-6">
+      <div class="navigation col-xs-6 flex middle-xs center-xs">
         <router-link :class="checkCurrentPath('stores') ? 'active-link' : ''" :to="{ name: 'Stores', params: { slug: 'all' } }">Акции</router-link>
         <router-link :to="{ path: '/' }">Магазины</router-link>
+        <search class="search" v-if="$route.name !== 'Home'" />
       </div>
       <div class="col-xs-3" />
     </div>
@@ -16,8 +17,12 @@
 </template>
 
 <script>
+import Search from './search.vue'
 
 export default {
+  components: {
+    Search
+  },
   methods: {
     checkCurrentPath (storeName) {
       return this.$route.path.includes(storeName)
@@ -26,7 +31,28 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss">
+#header {
+  .search {
+    border-radius: 5px;
+    input {
+      height: 40px;
+      border: 1px solid #d4d4d4;
+      transition: all .3s;
+      &:focus {
+        border-color: #276eef;
+        transition: all .3s;
+      }
+    }
+    .icon {
+      font-size: 25px;
+      color: black;
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
 #header {
   z-index: 3;
   box-shadow: 0 2px 8px 2px rgba(0,0,0,.05);

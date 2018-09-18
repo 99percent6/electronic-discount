@@ -3,14 +3,13 @@
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Результаты поиска для "{{ searchText }}"</h2>
     </div>
-    <div v-if="items && items.length > 0" class="product-listing col-xs-12 flex between-xs flex-wrap">
-      <div class="" v-for="(product, index) in items" :key="index">
+    <div v-if="items && items.length > 0" class="product-listing col-xs-12 flex around-xs flex-wrap">
+      <div class="" v-if="product.newPrice && product.oldPrice" v-for="(product, index) in items" :key="index">
         <product-tile :product="product" />
       </div>
     </div>
     <div v-else class="col-xs-12">
       <div class="empty-text">По вашему запросу ничего не найден. Попробуйте найти что-то другое.</div>
-      <search-panel />
     </div>
     <pagination />
   </div>
@@ -29,7 +28,7 @@ export default {
       searchText: '',
       items: [],
       pagination: {
-        perPage: 20
+        perPage: 16
       },
       countProducts: 0
     }

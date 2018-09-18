@@ -3,7 +3,7 @@
     <div class="product-image flex center-xs">
       <img :src="product.imageLink">
     </div>
-    <div class="product-descr relative flex center-xs">
+    <div class="product-descr flex center-xs">
       <div class="product-name">
         {{ product.title }}
       </div>
@@ -57,8 +57,6 @@ export default {
   position: relative;
   transition: 0.3s all;
   &:hover .product-image img {
-    // margin-top: -5px;
-    // box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
     transform: scale(1.2, 1.2);
     transition: 0.3s all;
   }

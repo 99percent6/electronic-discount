@@ -2,29 +2,42 @@ const osmosis = require('osmosis');
 const fs = require("fs");
 const url = 'https://www.eldorado.ru'
 let increment = 0
+console.log('Start Eldorado parsing!');
+fs.writeFileSync("stores/data/eldorado.json", JSON.stringify({ "items": [] }));
+console.log('Clear json file');
 
 osmosis
-  .get('https://www.eldorado.ru/promo/prm-summer-discount/')
-  .find('.items')
+  .get('https://www.eldorado.ru/special/693804202/')
+  .paginate('.catalogSection .rightColumn .goodsList .q-catalog-navigation-container .pager .prevNextButtons a[href].buttonNext')
+  .find('.goodsList')
   .set({
     items:[
       osmosis.find('.item')
       .set({
-        title: '.item__descr a.descr_name',
-        oldPrice: '.item__descr .descr__prices p',
-        newPrice: '.item__descr .descr__prices h3',
-        imageLink: '.item__images .images_goods img@src'
+        title: '.itemInfo .itemDescription .itemTitle a',
+        oldPrice: '.buyBox .priceContainer .actionPriceBigDiscount div span.oldPrice',
+        newPrice: '.buyBox .priceContainer .actionPriceBigDiscount span.discountPrice',
+        imageLink: '.itemInfo .itemPicture a > img@src',
+        itemLink: '.itemInfo .itemDescription .itemTitle a@href'
       })
     ]
   })
   .data(function(data) {
     for (let itm of data.items) {
-      itm.imageLink = url + itm.imageLink;
-      itm.newPrice = itm.newPrice.substring(0, itm.newPrice.length - 2);
+      itm.itemLink = url + itm.itemLink;
+      itm.newPrice = itm.newPrice ? itm.newPrice.substring(0, itm.newPrice.length - 2) : '';
       itm.oldPrice = itm.oldPrice ? itm.oldPrice.substring(0, itm.oldPrice.length - 2) : '';
       itm.store = 'Eldorado';
-      itm.id = ++increment;
       itm.created_at = new Date();
+      itm.startDate = new Date(2018, 8, 11, 4, 0, 0, 0);
+      itm.finishDate = new Date(2018, 9, 8, 4, 0, 0, 0);
     }
-    fs.writeFileSync("stores/data/eldorado.json", JSON.stringify(data, '', 1));
+    console.log('Count of new items - ', data.items.length);
+    let currentData = fs.readFileSync("stores/data/eldorado.json", "utf8");
+    currentData = JSON.parse(currentData)
+    let newData = {
+      items: currentData.items.concat(data.items)
+    };
+    console.log('Count of all items', newData.items.length);
+    fs.writeFileSync("stores/data/eldorado.json", JSON.stringify(newData, '', 1));
   })

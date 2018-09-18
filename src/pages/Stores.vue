@@ -29,8 +29,8 @@
       </div>
       <sorting class="col-xs-6" />
     </div>
-    <div class="product-listing flex between-xs flex-wrap">
-      <div class="" v-for="(product, index) in items" :key="index">
+    <div class="product-listing flex around-xs flex-wrap">
+      <div class="" v-if="product.newPrice && product.oldPrice" v-for="(product, index) in items" :key="index">
         <product-tile :product="product" />
       </div>
     </div>
@@ -64,7 +64,7 @@ export default {
       selectedStore: '',
       hide: false,
       pagination: {
-        perPage: 20
+        perPage: 16
       },
       countProducts: 0,
       maxPrice: 0

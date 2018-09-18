@@ -94,9 +94,10 @@ export default {
       }
     }
     .active {
+      color: white;
       font-size: 16px;
       margin: 0 5px;
-      background-color: #3ed1cd;
+      background-color: #276eef;
     }
   }
 </style>
