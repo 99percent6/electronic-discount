@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const bodyParser = require('body-parser')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -27,6 +28,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
       ],
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    },
+    before: function(app, server) {
+      app.use(bodyParser.json({
+        limit : 5000
+      }))
     },
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
