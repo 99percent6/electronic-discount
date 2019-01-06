@@ -12,6 +12,8 @@
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
     "parse-all-shops": "npm run eldo && npm run mvideo",
+    "clear-eldo": "STORE=eldo node stores/clear",
+    "clear-mvideo": "STORE=mvideo node stores/clear",
     "eldo": "node stores/eldorado",
     "mvideo": "node stores/mvideo",
     "create-common-json": "node stores/common",

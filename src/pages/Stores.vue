@@ -1,5 +1,5 @@
 <template>
-  <div id="stores" class="stores-container-page">
+  <div id="stores" class="stores-container-page container">
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Товары со скидками {{ store }}</h2>
     </div>
@@ -189,7 +189,6 @@ export default {
 .stores-container-page {
   box-sizing: border-box;
   height: auto;
-  width: 70vw;
   margin: 0 auto;
   padding: 60px 30px;
 }

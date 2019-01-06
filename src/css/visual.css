@@ -4,3 +4,7 @@
 .bg-gray {
   background-color: #3d3c42;
 }
+a {
+  color: black;
+  text-decoration: none;
+}

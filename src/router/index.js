@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/Home'
 import Stores from '@/pages/Stores'
 import Search from '@/pages/Search'
+import Product from '@/pages/Product'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/search/:searchText/page/:page',
       name: 'Search-page',
       component: Search
+    },
+    {
+      path: '/product/:slug',
+      name: 'Product',
+      component: Product
     }
   ]
 })

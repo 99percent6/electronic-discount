@@ -1,6 +1,7 @@
 <template>
   <div class="product col-xs-12">
-    <div class="product-image flex center-xs">
+    <router-link :to="{ name: 'Product', params: { slug: product.slug } }">
+      <div class="product-image flex center-xs">
       <img :src="product.imageLink">
     </div>
     <div class="product-descr flex center-xs">
@@ -15,6 +16,7 @@
         <img :src="getLogoLink(product.store)">
       </div>
     </div>
+    </router-link>
   </div>
 </template>
 

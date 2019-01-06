@@ -1,13 +1,13 @@
-let els = require('elasticsearch');
+let els = require('elasticsearch')
 let client = new els.Client({
-    host: 'http://localhost:9200',
-    log: 'error',
-    apiVersion: '5.5',
-    requestTimeout: 1000 * 60 * 60,
-    keepAlive: false
-});
-const items = require('./data/common.json');
-const mapping = require('./mapping/product_index_mapping');
+  host: 'http://localhost:9200',
+  log: 'error',
+  apiVersion: '5.5',
+  requestTimeout: 1000 * 60 * 60,
+  keepAlive: false
+})
+const items = require('./data/common.json')
+const mapping = require('./mapping/product_index_mapping')
 let increment = 0
 
 function addItems () {
@@ -18,33 +18,33 @@ function addItems () {
       },
       function (err, res) {
         if (err) {
-          console.error(err);
-          console.log('Error in check index exist');
-          reject(error);
+          console.error(err)
+          console.log('Error in check index exist')
+          reject(err)
         }
         if (res) {
-          console.log('Start delete index');
+          console.log('Start delete index')
           client.indices.delete(
             {
               'index': 'product_catalog'
             },
             function (error, response) {
               if (error) {
-                console.error(error);
-                console.log('Error in delete index');
-                reject(error);
+                console.error(error)
+                console.log('Error in delete index')
+                reject(error)
               }
               createIndex()
             }
           )
         } else {
-          console.log('Index does not exist');
+          console.log('Index does not exist')
           createIndex()
         }
       }
     )
     let createIndex = function () {
-      console.log('Create index');
+      console.log('Create index')
       client.indices.create(
         {
           'index': 'product_catalog',
@@ -80,12 +80,12 @@ function addItems () {
               body: items.items[index]
             }, function (error, response) {
               if (error) {
-                console.error(error);
-                reject(error);
+                console.error(error)
+                reject(error)
               } else {
-                console.log('Added item - ', items.items[index].title);
-                console.log('Items length - ', itemsLength);
-                console.log('Count - ', count);
+                console.log('Added item - ', items.items[index].title)
+                console.log('Items length - ', itemsLength)
+                console.log('Count - ', count)
                 ++count
                 ++index
               }
@@ -95,8 +95,8 @@ function addItems () {
             ++index
           }
         } else {
-          console.log('***************************Finish*****************************');
-          clearInterval(intervalID);
+          console.log('***************************Finish*****************************')
+          clearInterval(intervalID)
           resolve()
         }
       }, 20)
@@ -104,4 +104,4 @@ function addItems () {
   })
 }
 
-addItems();
+addItems()

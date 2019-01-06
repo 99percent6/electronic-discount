@@ -3,7 +3,7 @@
     <div class="background flex center-xs middle-xs">
       <search-panel />
     </div>
-    <div class="content-container">
+    <div class="content-container container">
       <div class="store col-xs-12 center-xs middle-xs">
         <stores />
       </div>
@@ -50,7 +50,6 @@ export default {
 }
 .content-container {
   background-color: #f2f7f9;
-  width: 70vw;
   margin: 0 auto;
 }
 .products {

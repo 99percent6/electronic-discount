@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel-container">
+  <div class="carousel-container container">
     <swiper :options="swiperOption">
       <swiper-slide v-if="slide.newPrice && slide.oldPrice" v-for="(slide, index) in swiperSlides" :key="index">
         <product-tile :product="slide"/>
@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 6,
+        slidesPerView: 5,
         spaceBetween: 15,
         pagination: {
           el: '.swiper-pagination',
