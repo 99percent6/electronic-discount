@@ -1,4 +1,3 @@
-import { slugify } from './slugify'
 const esHost = 'localhost:9200'
 const esIndex = 'product_catalog'
 
@@ -19,12 +18,11 @@ export function quickSearchByQuery ({ query = null, size = 20, from = 0, sort = 
     fetch(`http://${esHost}/${esIndex}/_search?size=${size}&from=${from}&sort=${sort}`, params).then(result => {
       return result.json()
     }).then(response => {
-      if (response.hits && response.hits.hits && response.hits.total > 0) {
+      if (response.hits && response.hits.hits && response.hits) {
         let items = []
         for (let item of response.hits.hits) {
           Object.assign(item._source, {
-            id: parseInt(item._id),
-            slug: slugify(item._source.title)
+            id: parseInt(item._id)
           })
           items.push(item._source)
         }

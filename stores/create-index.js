@@ -1,3 +1,4 @@
+const slugify = require('../src/helpers/slugify')
 let els = require('elasticsearch')
 let client = new els.Client({
   host: 'http://localhost:9200',
@@ -69,6 +70,7 @@ function addItems () {
         }
         oldPrice.length > 0 ? item.oldPrice = parseInt(oldPrice.join('')) : ''
         newPrice.length > 0 ? item.newPrice = parseInt(newPrice.join('')) : ''
+        Object.assign(item, { slug: slugify(item.title) })
       }
       let intervalID = setInterval(function () {
         if (items.items[index] && Object.keys(items.items[index]).length > 0) {
