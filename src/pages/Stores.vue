@@ -1,5 +1,5 @@
 <template>
-  <div id="stores" class="stores-container-page container">
+  <div id="stores" class="stores-container-page global-container">
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Товары со скидками {{ store }}</h2>
     </div>
@@ -16,9 +16,9 @@
             </div>
             <div class="store-list">
               <div class="" v-for="(store, index) in storeList" :key="index">
-                <input type="radio" :name="store.name" value=""
+                <input type="radio" :name="store.name" value="" class="pointer"
                   :checked="selectedStore === store.name" @click="selectStore(store.name)">
-                <label :class="selectedStore === store.name ? 'active-input' : ''" :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
+                <label class="pointer" :class="selectedStore === store.name ? 'active-input' : ''" :for="store.name" @click="selectStore(store.name)">{{ store.title }}</label>
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default {
 .all-filters {
   max-height: 200px;
   opacity: 1;
-  transition: max-height .5s ease-out .2s, opacity .5s;
+  transition: max-height .5s ease-out .2s, opacity 2s;
 }
 .all-filters .name {
   margin-bottom: 10px;

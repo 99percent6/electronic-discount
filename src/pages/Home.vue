@@ -3,7 +3,7 @@
     <div class="background flex center-xs middle-xs">
       <search-panel />
     </div>
-    <div class="content-container container">
+    <div class="content-container global-container">
       <div class="store col-xs-12 center-xs middle-xs">
         <stores />
       </div>
@@ -12,7 +12,7 @@
       <div class="title">
         <h2>Текущие акции</h2>
       </div>
-      <slider />
+      <slider :slides="slides"/>
     </div>
   </div>
 </template>
@@ -22,13 +22,31 @@ import ProductTile from '../components/ProductTile.vue'
 import Slider from '../components/Slider.vue'
 import SearchPanel from '../components/search.vue'
 import Stores from '../components/Stores/Stores.vue'
+import { quickSearchByQuery } from '../helpers/search.js'
 
 export default {
+  data () {
+    return {
+      slides: []
+    }
+  },
   components: {
     ProductTile,
     Slider,
     SearchPanel,
     Stores
+  },
+  created () {
+    this.loadItems()
+  },
+  methods: {
+    loadItems () {
+      quickSearchByQuery({ size: 15 }).then(res => {
+        if (res && res.hits) {
+          this.slides = res.hits.hits
+        }
+      })
+    }
   }
 }
 </script>

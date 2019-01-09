@@ -1,0 +1,2 @@
+@import '../variables/colors.scss';
+@include color-selectors(map_merge($colors, $colors), 'cl', 'color');

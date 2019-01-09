@@ -1,5 +1,5 @@
 <template>
-  <div id="search" class="search-page-container">
+  <div id="search" class="search-page-container global-container">
     <div class="col-xs-12 flex start-xs middle-xs">
       <h2>Результаты поиска для "{{ searchText }}"</h2>
     </div>
@@ -71,8 +71,6 @@ export default {
   box-sizing: border-box;
   background-color: #e8edee;
   height: auto;
-  width: 70vw;
-  margin: 0 auto;
   padding: 60px 30px;
 }
 .empty-text {

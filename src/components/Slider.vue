@@ -1,7 +1,7 @@
 <template>
-  <div class="carousel-container container">
+  <div class="carousel-container global-container">
     <swiper :options="swiperOption">
-      <swiper-slide v-if="slide.newPrice && slide.oldPrice" v-for="(slide, index) in swiperSlides" :key="index">
+      <swiper-slide v-if="slide.newPrice && slide.oldPrice" v-for="(slide, index) in slides" :key="index">
         <product-tile :product="slide"/>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -17,13 +17,24 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ProductTile from './ProductTile.vue'
-import { quickSearchByQuery } from '../helpers/search.js'
 
 export default {
+  props: {
+    slides: {
+      type: Array,
+      required: true,
+      default: () => []
+    },
+    countSlides: {
+      type: Number,
+      required: false,
+      default: 5
+    }
+  },
   data () {
     return {
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: this.countSlides,
         spaceBetween: 15,
         pagination: {
           el: '.swiper-pagination',
@@ -43,26 +54,13 @@ export default {
             slidesOffsetBefore: 55
           }
         }
-      },
-      swiperSlides: []
+      }
     }
   },
   components: {
     swiper,
     swiperSlide,
     ProductTile
-  },
-  created () {
-    this.loadItems()
-  },
-  methods: {
-    loadItems () {
-      quickSearchByQuery({ size: 15 }).then(res => {
-        if (res && res.hits) {
-          this.swiperSlides = res.hits.hits
-        }
-      })
-    }
   }
 }
 </script>

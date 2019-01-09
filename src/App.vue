@@ -19,10 +19,7 @@ export default {
 }
 </script>
 
-<style src="./css/flexbox-grid.css" lang="css"></style>
-<style src="./css/position.css" lang="css"></style>
-<style src="./css/visual.css" lang="css"></style>
-<style src="./css/container.css" lang="css"></style>
+<style src="./css/main.scss" lang="scss"></style>
 
 <style>
 body {
