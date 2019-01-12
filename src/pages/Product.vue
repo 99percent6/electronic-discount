@@ -185,6 +185,8 @@ $gray: color(gray);
   width: 100%;
   height: 25px;
   margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $gray;
   .icon-arrow-back {
     position: relative;
     left: 0;

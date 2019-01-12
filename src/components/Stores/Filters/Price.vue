@@ -6,9 +6,9 @@
     <div class="price-slider">
       <vue-slider ref="slider" v-model="value" v-bind="options" @callback="switchFilter()"></vue-slider>
       <div class="input flex between-xs middle-xs">
-        <input class="" @keyup.enter="switchFilter()" v-model="value[0]">
+        <input class="" @change="switchFilter()" v-model="value[0]">
         <span class="">&mdash;</span>
-        <input class="" @keyup.enter="switchFilter()" v-model="value[1]">
+        <input class="" @change="switchFilter()" v-model="value[1]">
       </div>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <template>
   <div class="pagination" v-show="pageCount && pageCount > 1 && activePage <= pageCount">
     <div class="container">
-      <div class="flex middle-xs center-xs align-center">
+      <div class="flex middle-xs center-xs">
         <div v-for="(pageNumber, key) in pageCount" :key="key" v-if="(Math.abs(pageNumber - activePage) < 3 && (activePage == 1 || activePage == pageCount)) || Math.abs(pageNumber - activePage) < 2 || pageNumber == pageCount || pageNumber == 1" >
-          <div @click="changePage(pageNumber)" class="item pointer" :class="{[activeClasses]: activePage === pageNumber, last: (pageNumber == pageCount && Math.abs(pageNumber - activePage) > 2 && pageCount != 4), first:(pageNumber == 1 && Math.abs(pageNumber - activePage) > 2 && pageCount != 4)}">{{ pageNumber }}</div>
+          <div @click="changePage(pageNumber)" class="item pointer flex center-xs middle-xs" :class="{[activeClasses]: activePage === pageNumber, last: (pageNumber == pageCount && Math.abs(pageNumber - activePage) > 2 && pageCount != 4), first:(pageNumber == 1 && Math.abs(pageNumber - activePage) > 2 && pageCount != 4)}">{{ pageNumber }}</div>
         </div>
       </div>
     </div>
@@ -94,6 +94,9 @@ export default {
       }
     }
     .active {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
       color: white;
       font-size: 16px;
       margin: 0 5px;

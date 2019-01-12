@@ -57,7 +57,7 @@ export default {
   box-sizing: border-box;
 }
 .background {
-  height: 80vh;
+  height: 50vh;
   width: 100%;
   background-image: url('../assets/background.jpg');
   background-attachment: fixed;
